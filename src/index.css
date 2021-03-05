@@ -80,3 +80,15 @@ code {
   border-right-color: var(--border-right-color);
   border-bottom-color: var(--border-bottom-color);
 }
+
+* {
+  box-sizing: border-box;
+}
+
+.grid-board {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), var(--tile-size)); /*num of cols in grid is set with --cols and the width of each is set by tile size */
+
+  grid-gap: 0;
+  align-self: flex-start;
+}
