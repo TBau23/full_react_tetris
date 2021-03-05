@@ -97,6 +97,7 @@ code {
   display: grid;
   grid-template-columns: repeat(4, var(--tile-size));
   grid-area: l;
+  align-self: flex-start;
 }
 
 .score-board-button {
