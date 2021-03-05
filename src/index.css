@@ -124,6 +124,7 @@ code {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  
 }
 
 .App {
@@ -146,6 +147,27 @@ code {
   /* can define all of the areas represented by this grid with their own variable */
   grid-template-areas: "h h h"
                        "l c r"
-                       ". b .";
+                       "b b b";
+}
 
+.controls {
+  grid-area: b;
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
+
+.control-button {
+  --size: calc(var(--tile-size) * 3);
+  width: var(--size);
+  height: var(--size);
+  text-align: center;
+  display: block;
+  margin: 2px;
+  border-width: 5px;
+  border-top-color: var(--button-color-t);
+  border-left-color: var(--button-color-l);
+  border-right-color: var(--button-color-r);
+  border-bottom-color: var(--button-color-b);
+  
 }
