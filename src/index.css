@@ -88,7 +88,11 @@ code {
 .grid-board {
   display: grid;
   grid-template-columns: repeat(var(--cols), var(--tile-size)); /*num of cols in grid is set with --cols and the width of each is set by tile size */
-
   grid-gap: 0;
   align-self: flex-start;
+}
+
+.next-block {
+  display: grid;
+  grid-template-columns: repeat(4, var(--tile-size));
 }
