@@ -90,11 +90,13 @@ code {
   grid-template-columns: repeat(var(--cols), var(--tile-size)); /*num of cols in grid is set with --cols and the width of each is set by tile size */
   grid-gap: 0;
   align-self: flex-start;
+  grid-area: c;
 }
 
 .next-block {
   display: grid;
   grid-template-columns: repeat(4, var(--tile-size));
+  grid-area: l;
 }
 
 .score-board-button {
@@ -105,4 +107,45 @@ code {
   border-left-color: var(--button-color-l);
   border-right-color: var(--button-color-r);
   border-bottom-color: var(--button-color-b);
+
+}
+
+.score-board {
+  grid-area: r;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 10vh;
+  grid-area: h;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App {
+  text-align: center;
+
+  --col-side: calc(var(--tile-size) * 4);
+  --col-center: calc(var(--tile-size) * 10);
+  --grid-height: calc(var(--tile-size) * 18);
+
+  width: calc(var(--tile-size) * (4 + 1 + 10 + 1 + 4));
+  margin: auto;
+  display: grid;
+
+  gap: var(--tile-size) var(--tile-size);
+  /* Defining three columns with the sizes defined using variables above */
+  grid-template-columns: var(--col-side) var(--col-center) var(--col --col-side);
+  /* Defining rows */
+  grid-template-rows: 100px var(--grid-height) 100px;
+
+  /* can define all of the areas represented by this grid with their own variable */
+  grid-template-areas: "h h h"
+                       "l c r"
+                       ". b .";
+
 }

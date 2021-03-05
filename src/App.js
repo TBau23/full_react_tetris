@@ -1,4 +1,4 @@
-import './App.css';
+
 import React from 'react';
 import GridBoard from './components/GridBoard';
 import NextBlock from './components/NextBlock';
