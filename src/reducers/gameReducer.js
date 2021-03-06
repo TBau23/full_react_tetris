@@ -1,6 +1,21 @@
 import { ActionTypes } from '../actions/actions.types';
+import { gridDefault, randomShape } from '../utils/index';
 
-const gameReducer = (state = {}, action) => {
+const INITIAL_STATE = {
+    grid: gridDefault(),
+    shape: randomShape(),
+    rotation: 0,
+    // x and y set the block to be middle of grid, above top
+    x: 5,
+    y: -4,
+    nextShape: randomShape(),
+    isRunning: true,
+    score: 0,
+    speed: 1000,
+    gameOver: false
+}
+
+const gameReducer = (state = INITIAL_STATE, action) => {
 
     switch(action.type) {
         case ActionTypes.ROTATE:
