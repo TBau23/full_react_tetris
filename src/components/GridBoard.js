@@ -16,9 +16,9 @@ const GridBoard = (props) => {
         return row.map((square, colIdx) => {
             // now mapping over all the zeros
             
-            const blockX = colIdx - x;
+            const blockX = colIdx - x; 
             const blockY = rowIdx - y;
-            let color = square;
+            let color = square; // 0 or 1 - binary has or does not have color
 
             if(blockX >= 0 && blockX < block.length && blockY >= 0 && blockY < block.length) {
                 // 

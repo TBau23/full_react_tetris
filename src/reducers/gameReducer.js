@@ -1,13 +1,13 @@
 import { ActionTypes } from '../actions/actions.types';
-import { gridDefault, randomShape, nextRotation, canMoveTo } from '../utils/index';
+import { gridDefault, randomShape, nextRotation, canMoveTo, checkRows, addBlockToGrid } from '../utils/index';
 
 const INITIAL_STATE = {
     grid: gridDefault(),
     shape: randomShape(),
     rotation: 0,
     // x and y set the block to be middle of grid, above top
-    x: 4,
-    y: -4,
+    x: 0,
+    y: 1,
     nextShape: randomShape(),
     isRunning: true,
     score: 0,
@@ -38,7 +38,27 @@ const gameReducer = (state = INITIAL_STATE, action) => {
             return state
     
         case ActionTypes.MOVE_DOWN:
-            return state
+            const possibleY = state.y + 1;
+            if(canMoveTo(state.shape, state.grid, state.x, possibleY, state.rotation)) {
+                // if you can move to next spot, do so
+                return {...state, y: possibleY}
+            }
+            // else, place block where it is now
+            const newGrid = addBlockToGrid(state.shape, state.grid, state.x, state.y, state.rotation);
+            const newState = INITIAL_STATE;
+            newState.grid = newGrid;
+            newState.shape = state.nextShape;
+            newState.nextShape = randomShape();
+            newState.score = state.score;
+            newState.isRunning = state.isRunning;
+
+            if(!canMoveTo(state.nextShape, newGrid, 0, 4, 0)) {
+                newState.shape = 0
+                return {...state, gameOver: true}
+            }
+            newState.score = state.score + checkRows(state.grid);
+
+            return newState
     
         case ActionTypes.RESUME:
             return state
