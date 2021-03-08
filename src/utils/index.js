@@ -134,8 +134,14 @@ export const randomShape = () => {
 
 export const nextRotation = (shape, rotation) => {
     const lastRotation = shapes[shape].length - 1;
-    if (rotation === lastRotation) return 0
-    else return rotation++;
+    console.log(lastRotation)
+    if (rotation === lastRotation) {
+      return 0
+    }
+    else {
+      rotation += 1;
+      return rotation
+    }
 }
 
 export const canMoveTo = (shape, grid, x, y, rotation) => {

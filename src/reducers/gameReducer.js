@@ -20,9 +20,12 @@ const gameReducer = (state = INITIAL_STATE, action) => {
     switch(action.type) {
         case ActionTypes.ROTATE:
             const newRotation = nextRotation(state.shape, state.rotation)
+            // console.log(newRotation)
             if (canMoveTo(state.shape, state.grid, state.x, state.y, newRotation)) {
+                console.log('WOOHOO')
                 return {...state, rotation: newRotation}
             }
+            
             return state
         
         case ActionTypes.MOVE_RIGHT:

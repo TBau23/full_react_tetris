@@ -9,10 +9,10 @@ const Controls = (props) => {
 
     return(
         <div className="controls">
-            <button className='control-button' onClick={e => { dispatch(move_left)} }>Left</button>
-            <button className='control-button' onClick={e => { dispatch(move_right)}}>Right</button>
-            <button className='control-button' onClick={e => { dispatch(rotate)}}>Rotate</button>
-            <button className='control-button' onClick={e => { dispatch(move_down) }}>Down</button>
+            <button className='control-button' onClick={() => { dispatch(move_left())} }>Left</button>
+            <button className='control-button' onClick={() => { dispatch(move_right())}}>Right</button>
+            <button className='control-button' onClick={() => { dispatch(rotate())}}>Rotate</button>
+            <button className='control-button' onClick={() => { dispatch(move_down())}}>Down</button>
         </div>
     )
 }

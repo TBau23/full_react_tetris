@@ -13,12 +13,12 @@ const ScoreBoard = (props) => {
             <div>Level: 1</div>
             <button onClick={e => {
                 if(gameOver) return
-                if(isRunning) dispatch(pause)
-                else dispatch(resume)
+                if(isRunning) dispatch(pause())
+                else dispatch(resume())
             }} className='score-board-button'>
                 {isRunning ? 'Pause' : 'Play'}
             </button>
-            <button onClick={e => { dispatch(restart)}} className='score-board-button'>
+            <button onClick={e => { dispatch(restart())}} className='score-board-button'>
                 Restart
             </button>
         </div>
