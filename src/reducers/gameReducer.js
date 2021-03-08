@@ -1,12 +1,12 @@
 import { ActionTypes } from '../actions/actions.types';
-import { gridDefault, randomShape } from '../utils/index';
+import { gridDefault, randomShape, nextRotation, canMoveTo } from '../utils/index';
 
 const INITIAL_STATE = {
     grid: gridDefault(),
     shape: randomShape(),
     rotation: 0,
     // x and y set the block to be middle of grid, above top
-    x: 5,
+    x: 4,
     y: -4,
     nextShape: randomShape(),
     isRunning: true,
@@ -19,7 +19,11 @@ const gameReducer = (state = INITIAL_STATE, action) => {
 
     switch(action.type) {
         case ActionTypes.ROTATE:
-            return state 
+            const newRotation = nextRotation(state.shape, state.rotation)
+            if (canMoveTo(state.shape, state.grid, state.x, state.y, newRotation)) {
+                return {...state, rotation: newRotation}
+            }
+            return state
         
         case ActionTypes.MOVE_RIGHT:
             return state

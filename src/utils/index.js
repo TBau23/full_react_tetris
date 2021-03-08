@@ -131,3 +131,42 @@ export const shapes = [
 export const randomShape = () => {
     return random(1, shapes.length - 1);
 }
+
+export const nextRotation = (shape, rotation) => {
+    const lastRotation = shapes[shape].length - 1;
+    if (rotation === lastRotation) return 0
+    else return rotation++;
+}
+
+export const canMoveTo = (shape, grid, x, y, rotation) => {
+  // need to determine if the current block can move to new x,y, or rotation
+  const currentShape = shapes[shape][rotation];
+  // loop through all parts of 2d array representing currentShape
+  for (let row = 0; row < currentShape.length; row++) {
+    for (let col = 0; col < currentShape[row].length; col++) {
+
+      if(currentShape[row][col] !== 0) {
+        const offsetX = col + x; // define where the 1's repping the shape are
+        const offsetY = row + y; // row and col just define the 4 x 4 shape
+        // offsetX and offsetY tells us where the actual shape exists in the grid
+        if(offsetY < 0) { // if the given square is not yet on the grid
+          continue // no need to look at it
+        }
+
+        const possibleRow = grid[offsetY]; // maps whole row that contains 1's
+        // onto the grid
+
+        // check that row is within bounds of grid
+        if(possibleRow) {
+          // check if specific square in row is occupied
+          if(possibleRow[offsetX] === undefined || possibleRow[offsetX] !== 0) {
+            return false // square is occupied or off the grid
+          }
+        } else {
+          return false // row does not exist
+        }
+      }
+    }
+  }
+  return true // shape can occupy the space
+}
