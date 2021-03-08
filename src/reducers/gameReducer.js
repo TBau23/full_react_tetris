@@ -26,9 +26,15 @@ const gameReducer = (state = INITIAL_STATE, action) => {
             return state
         
         case ActionTypes.MOVE_RIGHT:
+            if (canMoveTo(state.shape, state.grid, state.x + 1, state.y, state.rotation)) {
+                return {...state, x: state.x + 1}
+            }
             return state
         
         case ActionTypes.MOVE_LEFT:
+            if (canMoveTo(state.shape, state.grid, state.x - 1, state.y, state.rotation)) {
+                return {...state, x: state.x - 1}
+            }
             return state
     
         case ActionTypes.MOVE_DOWN:
