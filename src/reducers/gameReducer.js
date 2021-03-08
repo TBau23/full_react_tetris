@@ -7,7 +7,7 @@ const INITIAL_STATE = {
     rotation: 0,
     // x and y set the block to be middle of grid, above top
     x: 5,
-    y: 4,
+    y: -4,
     nextShape: randomShape(),
     isRunning: true,
     score: 0,
@@ -19,7 +19,7 @@ const gameReducer = (state = INITIAL_STATE, action) => {
 
     switch(action.type) {
         case ActionTypes.ROTATE:
-            return {...state, x: state.x - 1} 
+            return state 
         
         case ActionTypes.MOVE_RIGHT:
             return state
