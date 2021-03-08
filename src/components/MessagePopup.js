@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 
 const MessagePopup = (props) => {
 
-    const state = useSelector((state) => state.game)
-    const { isRunning, gameOver } = state;
+    const game = useSelector((state) => state.game)
+    const { isRunning, gameOver } = game;
     
     let message = '';
     if(gameOver) {
