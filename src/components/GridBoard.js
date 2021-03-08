@@ -14,6 +14,8 @@ const GridBoard = (props) => {
     const gridSquares = grid.map((row, rowIdx) => {
 
         return row.map((square, colIdx) => {
+            // now mapping over all the zeros
+            
             const blockX = colIdx - x;
             const blockY = rowIdx - y;
             let color = square;
