@@ -6,8 +6,8 @@ const INITIAL_STATE = {
     shape: randomShape(),
     rotation: 0,
     // x and y set the block to be middle of grid, above top
-    x: 0,
-    y: 1,
+    x: 5,
+    y: -4,
     nextShape: randomShape(),
     isRunning: true,
     score: 0,
@@ -51,14 +51,15 @@ const gameReducer = (state = INITIAL_STATE, action) => {
             const newState = INITIAL_STATE;
             newState.grid = newGrid;
             newState.shape = state.nextShape;
-            newState.nextShape = randomShape();
+            newState.nextShape = randomShape(); // generate new random shape
             newState.score = state.score;
             newState.isRunning = state.isRunning;
 
-            if(!canMoveTo(state.nextShape, newGrid, 0, 4, 0)) {
+            if(!canMoveTo(state.nextShape, newGrid, 0, 3, 0)) {
                 newState.shape = 0
                 return {...state, gameOver: true}
             }
+            
             newState.score = state.score + checkRows(state.grid);
 
             return newState
