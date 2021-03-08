@@ -59,21 +59,22 @@ const gameReducer = (state = INITIAL_STATE, action) => {
                 newState.shape = 0
                 return {...state, gameOver: true}
             }
-            
+
             newState.score = state.score + checkRows(state.grid);
 
             return newState
     
         case ActionTypes.RESUME:
-            return state
+            return {...state, isRunning: true}
     
         case ActionTypes.PAUSE:
-            return state
+            return {...state, isRunning: false}
     
         case ActionTypes.GAME_OVER:
             return state
     
         case ActionTypes.RESTART:
+            
             return state
 
         default:
