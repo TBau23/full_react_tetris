@@ -15,7 +15,6 @@ const NextBlock = (props) => {
         })
     })
 
-
     return (
         <div className='next-block'>
             {grid}
