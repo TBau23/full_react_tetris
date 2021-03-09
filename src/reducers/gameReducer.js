@@ -47,7 +47,17 @@ const gameReducer = (state = INITIAL_STATE, action) => {
                 return {...state, y: possibleY}
             }
             // else, place block where it is now
-            const newGrid = addBlockToGrid(state.shape, state.grid, state.x, state.y, state.rotation);
+            const gridState = addBlockToGrid(state.shape, state.grid, state.x, state.y, state.rotation);
+            const newGrid = gridState.grid;
+            const gameOver = gridState.gameOver;
+
+            if(gameOver) {
+                const newState = {...state};
+                newState.shape = 0;
+                newState.grid = newGrid;
+                return {...state, gameOver: true}
+            }
+            // resets required for new shape to fall
             const newState = INITIAL_STATE;
             newState.grid = newGrid;
             newState.shape = state.nextShape;
@@ -55,12 +65,7 @@ const gameReducer = (state = INITIAL_STATE, action) => {
             newState.score = state.score;
             newState.isRunning = state.isRunning;
 
-            if(!canMoveTo(state.nextShape, newGrid, 0, 3, 0)) {
-                newState.shape = 0
-                return {...state, gameOver: true}
-            }
-
-            newState.score = state.score + checkRows(state.grid);
+            newState.score = state.score + checkRows(newGrid);
 
             return newState
     

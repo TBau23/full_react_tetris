@@ -178,18 +178,28 @@ export const canMoveTo = (shape, grid, x, y, rotation) => {
 }
 
 export const addBlockToGrid = (shape, grid, x, y, rotation) => {
+  
+  let blockOffGrid = false;
   const block = shapes[shape][rotation];
-  const newGrid = [...grid]; 
+  const newGrid = [...grid]; // grid copy which will be altered with placed block
 
   // map block onto grid
   for (let row = 0; row < block.length; row++) {
     for ( let col = 0; col < block[row].length; col++) {
       if (block[row][col]) { // only map the 1's
-        newGrid[row + y][col + x] = shape; // set that location to a number indicating a color
+        const yIndex = row + y;
+        // if the y is off the top of screen then game is over
+        // y is about position in whole grid, row is just the block
+        if(yIndex < 0) {
+          blockOffGrid = true
+        } else {
+          newGrid[row + y][col + x] = shape; // set that location to a number indicating a color
+        }
+
       }
     }
   }
-  return newGrid;
+  return { grid: newGrid, gameOver: blockOffGrid};
 }
 
 // check for completed rows and score points
@@ -198,7 +208,7 @@ export const checkRows = (grid) => {
   let completedRows = 0;
 
   for (let row = 0; row < grid.length; row++) {
-    if (grid[row].indexOf(0) === - 1) {
+    if (grid[row].indexOf(0) === -1) { 
       completedRows += 1;
       // remove row and add empty one at top
       grid.splice(row, 1); // remove
