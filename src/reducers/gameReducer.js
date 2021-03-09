@@ -79,8 +79,7 @@ const gameReducer = (state = INITIAL_STATE, action) => {
             return state
     
         case ActionTypes.RESTART:
-            
-            return state
+            return {...INITIAL_STATE, grid: gridDefault()}
 
         default:
             return state
